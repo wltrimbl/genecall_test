@@ -1,7 +1,8 @@
+Description of genecall_test scripts:
+
 testFGS.pl
 cleangenecalls.pl
 confusion.pl
-
 
 
 testFGS.pl  
