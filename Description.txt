@@ -15,7 +15,6 @@ testFGS.pl
 		optionally calls confusion.pl  to clean up the output
 
 $ testFGS.pl --input ./ --output testout2 --quicktest
-Runs FGS 
 
 Example usage:
 $ testFGS-parse.pl BA 
@@ -30,4 +29,12 @@ stem     	post	TN2	TP	FN2	FP	WF	N	P	total
 ubuntu@dark-matter-dev:/mnt/testfrag/small/testout$ confusion.pl A2-0p5-150
 A2-0p5-150	csv	89	3051	225	274	1361	363	4637	5000
 ubuntu@dark-matter-dev:/mnt/testfrag/small/testout$ 
+
+
+
+
+ALIGNMENT-BASED "amino-acid-counting" method
+fasta-splitter.py 
+test-addup.py 
+test-similarities.py
  
