@@ -24,7 +24,7 @@ if($fgs3 + $fgs5 + $mga + $orph300 + $orph700 + $mgm + $blat+$prod+$addup== 0)
 		  { $fgs3 =1;}  # default
 my $filein  = $stem;
 my $tempdir = "";
-
+my $s;
 my $doit = !($test);
 die "$usage" unless $stem ne "";
 print "in file : $filein";
@@ -47,8 +47,8 @@ foreach my $q (@qualities)
 #my $fileorig = "$stem";
 my $file =  "$tempdir"."$fileorig";
 
-my $s = "sortfrags2.pl $fileorig.fasta $file";
-print "$s\n"; if($doit ==1) {system $s;}
+#my $s = "sortfrags2.pl $fileorig.fasta $file";
+#print "$s\n"; if($doit ==1) {system $s;}
 
 
 {for(my $i = 0; $i <= 6; $i++)
