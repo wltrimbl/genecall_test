@@ -6,11 +6,15 @@ sudo apt-get install zip -y
 mkdir ~/bin
 
 mkdir ~/build
-cd ~/build
+cd    ~/build
 
 git clone https://github.com/wltrimbl/genecall_test.git
-
 ln -s ~/build/genecall_test/* ~/bin
+
+wget ftp://ftp.ncbi.nih.gov/blast/executables/release/2.2.26/blast-2.2.26-x64-linux.tar.gz
+tar xvf blast-2.2.26-x64-linux.tar.gz
+ln -s $HOME/build/blast-2.2.26/bin/blastall         ~/bin
+ln -s /home/ubuntu/build/blast-2.2.26/bin/formatdb  ~/bin
 
 cd /mnt
 mkdir testing
@@ -19,4 +23,5 @@ wget http://www.mcs.anl.gov/~trimble/abinitio/fixedlength-bygenome-byreadingfram
 unzip fixedlength-bygenome-byreadingframe.zip
 
 testFGS.pl --input ./ --output testout2 --quicktest
+
 
