@@ -13,8 +13,8 @@ my $m ;
 @postoptions = ("csv") ;
 for $post (@postoptions)
 {
-if($post =~ /mga/)  {%map=(0=>2, 1=>1, 2=>0, 3=>3, 4=>5, 5=>4, 6=>6); } # mga alternative 
-	else        {%map=(0=>0, 1=>2, 2=>1, 3=>3, 4=>5, 5=>4, 6=>6);}
+if($post =~ /mga/)  {%map=(0=>2, 1=>1, 2=>0, 3=>3, 4=>5, 5=>4, 6=>6); } # mga remapping 
+	else        {%map=(0=>0, 1=>2, 2=>1, 3=>3, 4=>5, 5=>4, 6=>6);}  # standard remapping
 
 	{  # unused stem loop
 	$pre = "$stem"; 
