@@ -14,9 +14,9 @@ if __name__ == '__main__':
   
   (opts, args) = parser.parse_args()
   if not (opts.input and os.path.isfile(opts.input) ):
-    parser.error("Missing input file" )
+    parser.error("Missing input file %d"%(opts.input) )
 
-  if opts.verbose: sys.stdout.write("Processin %s ... "%opts.input)
+  if opts.verbose: sys.stdout.write("Processing %s ... "%opts.input)
   in_handle  = open(opts.input)
   
   in_handle   = open(opts.input, "r")
