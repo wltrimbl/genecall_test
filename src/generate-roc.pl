@@ -6,7 +6,7 @@
 # TN2  TP   FN2   FP   WF    N   P    total
 
 my @stems     = ('0p0', '0p2', '0p5', '2p8', '1e2', '1e3', '1e4', '1e5', '1e9');
-
+@stems=$ARGV;
 my $m ;
 %map=(0=>0, 1=>2, 2=>1, 3=>3, 4=>5, 5=>4, 6=>6); # fgs, prod
 
@@ -14,11 +14,13 @@ $post = "pro.csv";
 $post = "fg3.csv";
 $post = "mga.csv";
 $post = "fg0.csv";
+$post = ".csv";
 
 if($post =~ /mga/)  {%map=(0=>2, 1=>1, 2=>0, 3=>3, 4=>5, 5=>4, 6=>6); } # mga alternative 
 foreach $stem (@stems)
 {
 $pre = "TOT-$stem"; 
+$pre = "$stem"; 
 for($r = 0.9; $r < 1.6; $r+=.02)   # FGS 
 # for($r = 0; $r < 110; $r+=5)
 {
