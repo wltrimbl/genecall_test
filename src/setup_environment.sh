@@ -33,5 +33,7 @@ wget http://www.mcs.anl.gov/~trimble/abinitio/fixedlength-bygenome-byreadingfram
 unzip fixedlength-bygenome-byreadingframe.zip
 
 testFGS.pl --input ./ --output testout2 --quicktest
+testFGS.pl --input ./ --output testout2 --quicktest --addup | grep '    ' > testout2/summary.csv
+
 
 
