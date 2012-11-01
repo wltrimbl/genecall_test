@@ -35,5 +35,4 @@ unzip fixedlength-bygenome-byreadingframe.zip
 testFGS.pl --input ./ --output testout2 --quicktest
 testFGS.pl --input ./ --output testout2 --quicktest --addup | grep '    ' > testout2/summary.csv
 
-
-
+generate-roc.pl /mnt/testing/testout2/BS-0p5-150 
