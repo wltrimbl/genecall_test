@@ -36,3 +36,6 @@ testFGS.pl --input ./ --output testout2 --quicktest
 testFGS.pl --input ./ --output testout2 --quicktest --addup | grep '    ' > testout2/summary.csv
 
 generate-roc.pl /mnt/testing/testout2/BS-0p5-150 
+generate-roc.pl /mnt/testing/testout2/BS-0p5-150  >  /mnt/testing/testout2/BS-0p5-150.ROCinput.csv
+generate-roc.pl /mnt/testing/testout2/A2-0p5-150  >  /mnt/testing/testout2/A2-0p5-150.ROCinput.csv
+roc-plot.py /mnt/testing/testout2/??-0p5-150.ROCinput.csv
