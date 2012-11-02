@@ -39,3 +39,5 @@ generate-roc.pl /mnt/testing/testout2/BS-0p5-150
 generate-roc.pl /mnt/testing/testout2/BS-0p5-150  >  /mnt/testing/testout2/BS-0p5-150.ROCinput.csv
 generate-roc.pl /mnt/testing/testout2/A2-0p5-150  >  /mnt/testing/testout2/A2-0p5-150.ROCinput.csv
 roc-plot.py /mnt/testing/testout2/??-0p5-150.ROCinput.csv
+
+annotatemetasim.py  BP-0p2.metasim.fasta BP1.ptt 
