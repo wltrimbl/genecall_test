@@ -18,6 +18,8 @@ $post = "csv";
 
 die "$stems[0].0.$post missing" unless -e "$stems[0].0.$post" ;
 
+print "#Pre\tpost\tr\tTN\tTP\tFN\tFP\tWF\tN\tP\ttotal\n";
+
 if($post =~ /mga/)  {%map=(0=>2, 1=>1, 2=>0, 3=>3, 4=>5, 5=>4, 6=>6); } # mga alternative 
 foreach $stem (@stems)
 {
@@ -29,7 +31,7 @@ for($r = 0.9; $r < 1.6; $r+=.02)   # FGS
 # $filter = " awk '\$3>=$r' ";
   $filter = " awk '\$3<=$r' ";  # For FGS
 
- print "$pre\t$post\t$r\t";
+# print "$pre\t$post\t$r\t";
 
 $N = `cat $pre.6.$post | wc -l`;
 chomp($N);
@@ -85,6 +87,7 @@ my $TN2 = $N - $FP;
 
 #print "TN\tTP\tFN\tFP\n";
 #print "TN $TN TP $TP FN $FN  FP $FP \n";
+print "$pre\t$post\t$r\t";
 print "$TN2\t$TP\t$FN2\t$FP\t$WF\t$N\t$P\t$total\n";
 }
 
