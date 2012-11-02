@@ -22,5 +22,5 @@ if __name__ == '__main__':
     plt.plot(TNR, TPR, "o-", label=infile)
     plt.xlabel("TNR")
     plt.ylabel("TPR")
-  plt.legend()
+  plt.legend(loc=0)
   plt.show()
