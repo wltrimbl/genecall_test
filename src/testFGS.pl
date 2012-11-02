@@ -44,7 +44,7 @@ die "$usage" unless $outstem ne "";
 my @genomes = ('A1','A2','A3','BA','BP','BS','CJ','CT','EC','HP','PA','PM','WE');
 for $stem (@genomes) 
 	{
-print STDERR, "Stem : $stem\n";
+print STDERR "Stem : $stem\n";
 
 my @sizes     = ('075', '100', '150', '200', '300', '400', '600', '1000');
 if($quicktest){ @sizes     = ('150');}
@@ -55,7 +55,7 @@ if($quicktest){ @qualities     = ('0p5');}
 
 if( ! -e $outstem ) { system "mkdir $outstem";}
 
-print STDERR, "Input: $input Output: $outstem\n";
+print STDERR "Input: $input Output: $outstem\n";
 
 foreach my $length (@sizes)
 {
