@@ -9,7 +9,13 @@ PPV = TP/(TP + FP +WF), w
 here Ntot = TP + TN + FP + FN +WF.
 '''
 
+__helpmsg__ = "Usage: show_fgsout.py test1.table.csv test2.table.csv test3.table.csv ...\n"
+
 linestyles1 = ['-v', '-ok', '-dr', '-1k', '-2m', '-', '-', '-', '-', '-']
+
+#FILTERED = ['A1','A2','A3']
+FILTERED = ['BA','BP','BS','CJ','CT','EC','HP','PA','PM','WE']
+#FILTERED = ['A1','A2','A3','BA','BP','BS','CJ','CT','EC','HP','PA','PM','WE']
 
 def plotline(ax, x, output, linestyles):
     lines = ax.plot(x, output, linestyles, linewidth=PLOTWIDTH, markeredgewidth=1, markersize=8)
@@ -33,17 +39,22 @@ def parse_table(filename):
         columns = line.split()
         sub_columns = columns[0].split("-")
         record['genome'] = sub_columns[0]
+        
+        if record['genome'] not in FILTERED:
+            continue
+        
         record['error'] = sub_columns[1]
         record['length'] = sub_columns[2]
-        record['TN2'] = columns[1]
-        record['TP'] = columns[2]
-        record['N2'] = columns[3]
-        record['FP'] = columns[4]
-        record['WF'] = columns[5]
-        record['N'] = columns[6]
-        record['P'] = columns[7]
-        record['total'] = columns[8]
+        record['TN2'] = columns[2]
+        record['TP'] = columns[3]
+        record['N2'] = columns[4]
+        record['FP'] = columns[5]
+        record['WF'] = columns[6]
+        record['N'] = columns[7]
+        record['P'] = columns[8]
+        record['total'] = columns[9]
         record['train'] = training_set
+
         record_list.append(record)
     return record_list
 
