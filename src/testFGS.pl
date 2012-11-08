@@ -3,7 +3,7 @@
 use strict;
 use Getopt::Long;
 my ($stem, $verbose, $mga) = ('', 0,0);
-my ($fgs3, $fgs5, $test, $prod, $parseonly, $addup) = (0,0, 0, 0,0, 0,0);
+my ($fgs3, $fgs5, $test, $prod, $parseonly, $addup, $debug) = (0,0, 0, 0,0, 0,0);
 my ($orph300, $orph700, $mgm) = (0,0, 0, 0,0);
 my ($outstem, $quicktest, $input);
 my $usage = qq(Usage: testFGS.pl --input <dir> [--mga | --fgs3 | --fgs5] 
@@ -33,15 +33,23 @@ if ( ! GetOptions ("output=s"     => \$outstem,
                    "addup!"      => \$addup,
                    "parseonly!"      => \$parseonly,
                    "quicktest!"      => \$quicktest,
+                   "debug!"         => \$debug,
                   )   ) { print "GO $usage \n"; die;}
-if($fgs3 + $fgs5 + $mga + $orph300 + $orph700 + $mgm + $prod +$addup> 1) 
+if($fgs3 + $fgs5 + $mga + $orph300 + $orph700 + $mgm + $prod +$addup +$debug> 1) 
                   { print "must specify only one model\n$usage";die;}
-if($fgs3 + $fgs5 + $mga + $orph300 + $orph700 + $mgm + $prod+$addup== 0) 
+if($fgs3 + $fgs5 + $mga + $orph300 + $orph700 + $mgm + $prod+$addup +$debug== 0) 
 		  { $fgs3 =1;}  # default
 
 my $doit = !($test);
 die "$usage" unless $outstem ne "";
+
 my @genomes = ('A1','A2','A3','BA','BP','BS','CJ','CT','EC','HP','PA','PM','WE');
+
+if ($debug) {
+@genomes = ('BA');
+}
+
+
 for $stem (@genomes) 
 	{
 print STDERR "Stem : $stem\n";
@@ -93,6 +101,15 @@ print "$s\n"; if($doit ==1) {system $s; }
 unlink "$outstem/$fileorig.$i.fg5.ffn";
 }
 
+if ($debug) {
+my $fgstrain = "complete";
+$s = "run_FragGeneScan.pl -genome=$file.$i.fa -out=$outstem/$fileorig.$i -complete=0  -train=$fgstrain";
+print "$s\n"; if($doit ==1) {system $s; }
+#unlink "$file.$i.fg5.faa";
+unlink "$outstem/$fileorig.$i.ffn";
+
+}
+
 if($mga)
 {
 $s = "mga $file.$i.fa > $file.$i.mga";
@@ -133,39 +150,44 @@ if($fgs5 )
 $s = "cleangenecalls.pl fg5 $outstem/$file";
 print "$s\n"; if($doit ==1) {system $s;} 
 }
+if($debug)
+{
+$s = "cleangenecalls.pl fg3 $outstem/$fileorig";
+print "$s\n"; if($doit ==1) {system $s;} 
+}
 if($fgs3) 
 {
-$s = "cleangenecalls.pl fg3 $outstem/$file";
+$s = "cleangenecalls.pl fg3 $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;} 
 }
 if($mga)
 {
-$s = "cleangenecalls.pl mga $outstem/$file";
+$s = "cleangenecalls.pl mga $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;}
 }
 if($orph300 )
 {
-$s = "cleangenecalls.pl op3 $outstem/$file";
+$s = "cleangenecalls.pl op3 $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;}
 }
 if($orph700)
 {
-$s = "cleangenecalls.pl op7 $outstem/$file";
+$s = "cleangenecalls.pl op7 $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;}
 }
 if($mgm)
 {
-$s = "cleangenecalls.pl gff $outstem/$file";
+$s = "cleangenecalls.pl gff $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;}
 }
 if($prod)
 {
-my $s = "cleangenecalls.pl pro $outstem/$file";
+my $s = "cleangenecalls.pl pro $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;}
 }
 if($addup)
 {
-$s = "confusion.pl $outstem/$file";
+$s = "confusion.pl $outstem/$fileorig";
 print "$s\n"; if($doit ==1) {system $s;}
 }
 #================done with cleanup================
