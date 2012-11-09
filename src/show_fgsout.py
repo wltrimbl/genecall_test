@@ -11,7 +11,7 @@ here Ntot = TP + TN + FP + FN +WF.
 
 __helpmsg__ = "Usage: show_fgsout.py test1.table.csv test2.table.csv test3.table.csv ...\n"
 
-linestyles1 = ['-v', '-ok', '-dr', '-1k', '-2m', '-', '-', '-', '-', '-']
+linestyles1 = ['-v', '-or', '-dk', '->k', '-1m', '-^g', '-', '-', '-', '-']
 
 #FILTERED = ['A1','A2','A3']
 FILTERED = ['BA','BP','BS','CJ','CT','EC','HP','PA','PM','WE']
@@ -25,11 +25,9 @@ GRID_LINEWIDTH = 0.6
 GRID_ALPHA = 0.3
 PLOTWIDTH = 1.4
 
-sense_yticks = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-        
 def parse_table(filename):
 #stem TN2 TP N2 FP WF N P total  
-#A1-0p2-075   335    3408    553    229    475         564    4436    5000  
+#A1-0p2-075  csv 335    3408    553    229    475         564    4436    5000  
     infile = open(filename, "r")
     record_list = []
     training_set = filename.split(".")[0]
@@ -90,24 +88,21 @@ def plot_sensitivity(rec_list, error_rate):
     fig_type = "error"
     legend_type = "train"
     x_type = "length"
-    length_values = ['075', '100', '150', '200', '300', '400', '600', '1000']
+    x_values = [075, 100, 150, 200, 300, 400, 600, 1000]
+    x_labels = [0, 200, 400, 600, 800, 1000]
     
     train_list = []
     for names in infile_names:
         train = names.split(".")[0]
         train_list.append(train)
         
-    ind = np.arange(len(length_values))  # the x locations for the groups
-    width = 0.35       # the width offset
     fig = plt.figure()
     ax = fig.add_subplot(111)
     
-    # add some
     ax.set_ylabel('sensitivity')
     ax.set_xlabel("length of reads")
     ax.set_title('error rate %s' % error_rate)
-    ax.set_xticks(ind)
-    ax.set_xticklabels(length_values)
+    ax.set_xticklabels(x_labels)
     
     plot_things = []
     plot_labels = []
@@ -115,7 +110,7 @@ def plot_sensitivity(rec_list, error_rate):
     i = 0
     for train in train_list:
         sens_list = get_sensitivity_by_error_train(rec_list, error_rate, train)
-        plots = plotline(ax, ind, sens_list, linestyles1[i])
+        plots = plotline(ax, x_values, sens_list, linestyles1[i])
         plot_things.append(plots)
         plot_labels.append(plots[0])
         legend_labels.append(train)
@@ -124,9 +119,8 @@ def plot_sensitivity(rec_list, error_rate):
     ax.legend(tuple(plot_labels), tuple(legend_labels), loc=0)
 
     ax.set_ylim(ymin=0, ymax=1)
-#    ax.set_yticks(cdfyticks)
+    ax.set_yticks([0.1 * x for x in range(11)])
     ax.yaxis.grid(True, linestyle='-', which='major', alpha=GRID_ALPHA, linewidth=GRID_LINEWIDTH)
-#    ax.xaxis.set_major_locator(MultipleLocator(1))
     ax.xaxis.grid(True, linestyle='-', which='major', alpha=GRID_ALPHA, linewidth=GRID_LINEWIDTH)
     plt.savefig("sensitivity-%s" % error_rate)
 
@@ -152,10 +146,7 @@ if __name__ == '__main__':
     for filename in infile_names:
         records = parse_table(filename)
         rec_list.extend(records)
-        
-#    for rec in rec_list:
-#        print rec
-    
+  
     for error_rate in error_lists:
         plot_sensitivity(rec_list, error_rate)
  
