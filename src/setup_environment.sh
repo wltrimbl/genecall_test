@@ -39,6 +39,9 @@ cd testing
 wget http://www.mcs.anl.gov/~trimble/abinitio/fixedlength-bygenome-byreadingframe.zip 
 unzip fixedlength-bygenome-byreadingframe.zip
 
+wget http://www.mcs.anl.gov/~trimble/abinitio/code4testing.zip 
+unzip code4testing.zip 
+
 testFGS.pl --input ./ --output testout2 --quicktest
 testFGS.pl --input ./ --output testout2 --quicktest --addup | grep '    ' > testout2/summary.csv
 

@@ -4,7 +4,6 @@ import sys, os, string
 from optparse import OptionParser
 from Bio import SeqIO
 
-
 if __name__ == '__main__':
   usage  = "usage: %prog -i <input sequence file> -o <output file>"
   parser = OptionParser(usage)
@@ -30,14 +29,10 @@ if __name__ == '__main__':
   something=SeqIO.parse(in_handle, "fasta") 
   for seqrecord in something: 
     try:
-#    try out_handles[seqrecord.description[0:9]] > 0 :
       indx = string.find(str(seqrecord.description), "NC_") 
       if indx >=  0 :
         acc = str(seqrecord.description[indx:indx+9])
-#        print "acc", acc , "idx ", indx
       out_handles[acc].write(">%s\n%s\n"%(seqrecord.description, str(seqrecord.seq)) )
-#      sys.stdout.write(str(seqrecord.description)[0:9]+"\n")
-#      sys.stdout.write(">%s\n%s\n"%(seqrecord.description, str(seqrecord.seq)) )
     except: 
         pass
 	
